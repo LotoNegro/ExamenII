@@ -18,8 +18,6 @@ namespace BD
         public DataAccess(IConfiguration _Config)
         {
             config = _Config;
-
-
         }
 
 

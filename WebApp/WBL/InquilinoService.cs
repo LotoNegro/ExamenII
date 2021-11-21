@@ -10,11 +10,11 @@ namespace WBL
 {
     public interface IInquilinoService1
     {
-        Task<DBEntity> Create(InquilinoEntity entity);
-        Task<DBEntity> Delete(InquilinoEntity entity);
-        Task<IEnumerable<InquilinoEntity>> Get();
-        Task<InquilinoEntity> GetById(InquilinoEntity entity);
-        Task<DBEntity> Update(InquilinoEntity entity);
+        Task<DBEntity> Create(Producto entity);
+        Task<DBEntity> Delete(Producto entity);
+        Task<IEnumerable<Producto>> Get();
+        Task<Producto> GetById(Producto entity);
+        Task<DBEntity> Update(Producto entity);
     }
 
     public class InquilinoService : IInquilinoService1
@@ -31,11 +31,11 @@ namespace WBL
         //Metodo Get
 
 
-        public async Task<IEnumerable<InquilinoEntity>> Get()
+        public async Task<IEnumerable<Producto>> Get()
         {
             try
             {
-                var result = sql.QueryAsync<InquilinoEntity>("exp.InquilinoObtener");
+                var result = sql.QueryAsync<Producto>("exp.InquilinoObtener");
 
                 return await result;
             }
@@ -49,11 +49,11 @@ namespace WBL
         }
 
         //Metodo GetById
-        public async Task<InquilinoEntity> GetById(InquilinoEntity entity)
+        public async Task<Producto> GetById(Producto entity)
         {
             try
             {
-                var result = sql.QueryFirstAsync<InquilinoEntity>("exp.InquilinoObtener", new
+                var result = sql.QueryFirstAsync<Producto>("exp.InquilinoObtener", new
                 { entity.IdInquilino });
 
                 return await result;
@@ -68,7 +68,7 @@ namespace WBL
 
         //Metodo Create
 
-        public async Task<DBEntity> Create(InquilinoEntity entity)
+        public async Task<DBEntity> Create(Producto entity)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace WBL
         }
 
         //Metodo Update
-        public async Task<DBEntity> Update(InquilinoEntity entity)
+        public async Task<DBEntity> Update(Producto entity)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace WBL
         }
 
         //Metodo Delete
-        public async Task<DBEntity> Delete(InquilinoEntity entity)
+        public async Task<DBEntity> Delete(Producto entity)
         {
             try
             {
