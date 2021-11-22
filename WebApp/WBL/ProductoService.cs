@@ -59,9 +59,8 @@ namespace WBL
 
                 return await result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw;
             }
         }
