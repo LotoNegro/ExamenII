@@ -11,3 +11,4 @@ Post-Deployment Script Template
 */
 
 : .\Producto.sql
+: .\Orden.sql

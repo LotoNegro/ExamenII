@@ -135,7 +135,7 @@ namespace WBL
         {
             try
             {
-                var result = sql.ExecuteAsync("dbo.OrdenEliminar", new
+                var result = sql.ExecuteAsync(sp: "dbo.OrdenEliminar", Param: new
                 {
                     entity.IdOrden,
 
