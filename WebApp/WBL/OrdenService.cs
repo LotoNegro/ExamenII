@@ -77,14 +77,13 @@ namespace WBL
             }
             catch (Exception)
             {
-
                 throw;
             }
 
         }
 
         //Metodo Create
-
+        
         public async Task<DBEntity> Create(OrdenEntity entity)
         {
             try

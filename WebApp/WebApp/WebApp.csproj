@@ -10,6 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Orden\" />
+    <Folder Include="Pages\Producto\" />
     <Folder Include="wwwroot\App\" />
   </ItemGroup>
 
