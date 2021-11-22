@@ -7,22 +7,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Entity;
 using WBL;
 
-namespace WebApp.Pages.Orden
+namespace WebApp.Pages.Producto
 {
     public class EditModel : PageModel
     {
-        private readonly IOrdenService OrdenService;
-        private readonly IProductoService IdOrdenService;
+        private readonly IProductoService ProductoService;
 
-        public EditModel(IOrdenService OrdenService, IProductoService IdProductoService)
+        public EditModel(IProductoService ProductoService, IProductoService IdProductoService)
         {
-            this.OrdenService = OrdenService;
-            this.IdOrdenService = IdProductoService;
+            this.ProductoService = ProductoService;
+            this.ProductoService = IdProductoService;
         }
 
         [BindProperty]
-        public OrdenEntity Entity { get; set; } = new OrdenEntity();
-        public IEnumerable<OrdenEntity> IdOrdenLista { get; set; } = new List<OrdenEntity>();
+        public ProductoEntity Entity { get; set; } = new ProductoEntity();
+        public IEnumerable<ProductoEntity> IdProductoLista { get; set; } = new List<ProductoEntity>();
 
         [BindProperty(SupportsGet = true)]
         public int? id { get; set; }
@@ -34,10 +33,10 @@ namespace WebApp.Pages.Orden
             {
                 if (id.HasValue)
                 {
-                    Entity = await OrdenService.GetById(new() { IdOrden = id });
+                    Entity = await ProductoService.GetById(new() { IdProducto = id });
                 }
 
-                IdOrdenLista = (IEnumerable<OrdenEntity>)await IdOrdenService.GetLista();
+                IdProductoLista = await ProductoService.GetLista();
 
                 return Page();
             }
@@ -56,16 +55,16 @@ namespace WebApp.Pages.Orden
             try
             {
                 //Metodo Actualizar
-                if (Entity.IdOrden.HasValue)
+                if (Entity.IdProducto.HasValue)
                 {
-                    var result = await OrdenService.Update(Entity);
+                    var result = await ProductoService.Update(Entity);
 
                     if (result.CodeError != 0) throw new Exception(result.MsgError);
                     TempData["Msg"] = "El registro se ha actualizado";
                 }
                 else
                 {
-                    var result = await OrdenService.Create(Entity);
+                    var result = await ProductoService.Create(Entity);
 
                     if (result.CodeError != 0) throw new Exception(result.MsgError);
                     TempData["Msg"] = "El registro se ha insertado";
