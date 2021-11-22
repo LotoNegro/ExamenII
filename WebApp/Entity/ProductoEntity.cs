@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class Producto
+    public class ProductoEntity
     {
         public int? IdProducto { get; set; }
-
         public string NombreProducto { get; set; }
         public int? PrecioProducto { get; set; }
     }

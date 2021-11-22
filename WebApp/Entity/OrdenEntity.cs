@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class Orden
+    public class OrdenEntity
     {
         public int? IdOrden { get; set; }
         public int? CantidadProducto { get; set; }
         public string Estado { get; set; }
+        public int? IdProducto { get; set; }
     }
 }

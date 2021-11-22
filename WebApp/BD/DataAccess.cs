@@ -18,6 +18,8 @@ namespace BD
         public DataAccess(IConfiguration _Config)
         {
             config = _Config;
+
+
         }
 
 
@@ -265,16 +267,6 @@ namespace BD
                 throw;
             }
 
-        }
-
-        public object QueryFirstAsync<T>(string v, object p)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object ExecuteAsync(string v, object p)
-        {
-            throw new NotImplementedException();
         }
     }
 }
