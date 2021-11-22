@@ -2,30 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Entity;
 using WBL;
 
-namespace WebApp.Pages.Vehiculo
+namespace WebApp.Pages.Orden
 {
     public class EditModel : PageModel
     {
-        private readonly IVehiculoService vehiculoService;
-        private readonly IMarcaVehiculoService marcaVehiculoService;
+        private readonly IOrdenService OrdenService;
+        private readonly IProductoService IdProductoService;
 
-        public EditModel(IVehiculoService vehiculoService, IMarcaVehiculoService marcaVehiculoService)
+        public EditModel(IOrdenService OrdenService, IProductoService IdProductoService)
         {
-            this.vehiculoService = vehiculoService;
-            this.marcaVehiculoService = marcaVehiculoService;
+            this.OrdenService = OrdenService;
+            this.IdProductoService = IdProductoService;
         }
 
-
-
         [BindProperty]
-        public VehiculoEntity Entity { get; set; } = new VehiculoEntity();
-
-        public IEnumerable<MarcaVehiculoEntity> MarcaVehiculoLista { get; set; } = new List<MarcaVehiculoEntity>();
+        public OrdenEntity Entity { get; set; } = new OrdenEntity();
+        public IEnumerable<ProductoEntity> IdProductoLista { get; set; } = new List<ProductoEntity>();
 
         [BindProperty(SupportsGet = true)]
         public int? id { get; set; }
@@ -33,15 +30,14 @@ namespace WebApp.Pages.Vehiculo
 
         public async Task<IActionResult> OnGet()
         {
-
             try
             {
                 if (id.HasValue)
                 {
-                    Entity = await vehiculoService.GetById(new() { VehiculoId = id });
+                    Entity = await OrdenService.GetById(new() { IdOrden = id });
                 }
 
-                MarcaVehiculoLista = await marcaVehiculoService.GetLista();
+                IdProductoLista = await IdProductoService.GetLista();
 
                 return Page();
             }
@@ -51,6 +47,7 @@ namespace WebApp.Pages.Vehiculo
                 return Content(ex.Message);
             }
 
+
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -58,36 +55,39 @@ namespace WebApp.Pages.Vehiculo
 
             try
             {
-                if (Entity.VehiculoId.HasValue)
+                //Metodo Actualizar
+                if (Entity.IdOrden.HasValue)
                 {
-                    //Actualizar 
-                    var result = await vehiculoService.Update(Entity);
+                    var result = await OrdenService.Update(Entity);
 
                     if (result.CodeError != 0) throw new Exception(result.MsgError);
-                    TempData["Msg"] = "Se actualizó correctamente";
+                    TempData["Msg"] = "El registro se ha actualizado";
                 }
                 else
                 {
-                    //Nuevo 
-                    var result = await vehiculoService.Create(Entity);
+                    var result = await OrdenService.Create(Entity);
 
                     if (result.CodeError != 0) throw new Exception(result.MsgError);
-                    TempData["Msg"] = "Se agregó correctamente";
-
+                    TempData["Msg"] = "El registro se ha insertado";
                 }
 
                 return RedirectToPage("Grid");
             }
-
-
-
             catch (Exception ex)
             {
 
                 return Content(ex.Message);
             }
 
+
         }
+
+
+
+
+
+
+
 
     }
 }

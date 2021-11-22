@@ -7,26 +7,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using WBL;
 using Entity;
 
-namespace WebApp.Pages.Vehiculo
+namespace WebApp.Pages.Orden
 {
     public class GridModel : PageModel
     {
-        private readonly IVehiculoService vehiculoService;
+        private readonly IOrdenService OrdenService;
 
-        public GridModel(IVehiculoService vehiculoService)
+        public GridModel(IOrdenService OrdenService)
         {
-            this.vehiculoService = vehiculoService;
+            this.OrdenService = OrdenService;
         }
 
-        public IEnumerable<VehiculoEntity> GridList { get; set; } = new List<VehiculoEntity>();
+
+        public IEnumerable<OrdenEntity> GridList { get; set; } = new List<OrdenEntity>();
 
         public string Mensaje { get; set; } = "";
-
         public async Task<IActionResult> OnGet()
         {
+
             try
             {
-                GridList = await vehiculoService.Get();
+                GridList = await OrdenService.Get();
 
                 if (TempData.ContainsKey("Msg"))
                 {
@@ -36,6 +37,7 @@ namespace WebApp.Pages.Vehiculo
                 TempData.Clear();
 
                 return Page();
+
             }
             catch (Exception ex)
             {
@@ -47,21 +49,20 @@ namespace WebApp.Pages.Vehiculo
 
         public async Task<IActionResult> OnGetEliminar(int id)
         {
+
             try
             {
-                var result = await vehiculoService.Delete(new()
-                {
-                    VehiculoId = id
-
-                });
+                var result = await OrdenService.Delete(new() { IdOrden = id });
 
                 if (result.CodeError != 0)
                 {
                     throw new Exception(result.MsgError);
                 }
+
                 TempData["Msg"] = "Se elimino correctamente";
 
                 return Redirect("Grid");
+
 
             }
             catch (Exception ex)
