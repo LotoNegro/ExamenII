@@ -18,7 +18,7 @@
                     <label for="Entity.IdProducto" class="form-label">IdProducto</label>
 
                     <select asp-for="Entity.IdProducto" class="form-select"
-                            asp-items="@(new SelectList(Model.ProductoLista,"IdProducto","Descripcion"))" required>
+                            asp-items="@(new SelectList(Model.IdProductoLista,"IdProducto","Descripcion"))" required>
                     </select>
                 </div>
 
